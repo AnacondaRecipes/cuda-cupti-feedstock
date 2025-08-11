@@ -35,14 +35,14 @@ requirements:
 outputs:
   - name: cuda-cupti
     build:
-    # Repacked binaries on linux aarch64 have flag DT_TLSDESC (GNU_HASH),
-    # which is not supported by LIEF and can raise ValueError during
-    # overlinking checks. Use blanket globs to ignore all .so* files on aarch64.
-    overlinking_ignore_patterns:  # [linux and aarch64]
-      - "targets/sbsa-linux/lib/*.so*"  # [linux and aarch64]
-      - "targets/sbsa-linux/lib/stubs/*.so*"  # [linux and aarch64]
-      - "lib/*.so*"  # [linux and aarch64]
-    binary_relocation: false
+      binary_relocation: false
+      # Repacked binaries on linux aarch64 have flag DT_TLSDESC (GNU_HASH),
+      # which is not supported by LIEF and can raise ValueError during
+      # overlinking checks. Use blanket globs to ignore all .so* files on aarch64.
+      overlinking_ignore_patterns:  # [linux and aarch64]
+        - "targets/sbsa-linux/lib/*.so*"  # [linux and aarch64]
+        - "targets/sbsa-linux/lib/stubs/*.so*"  # [linux and aarch64]
+        - "lib/*.so*"  # [linux and aarch64]
     files:
       - lib/libcupti*.so.*                    # [linux]
       - targets/{{ target_name }}/lib/*.so.*  # [linux]
@@ -90,6 +90,7 @@ outputs:
 
   - name: cuda-cupti-dev
     build:
+      binary_relocation: false
       run_exports:
         - {{ pin_subpackage("cuda-cupti", max_pin="x") }}
     files:
