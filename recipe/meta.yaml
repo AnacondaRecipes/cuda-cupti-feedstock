@@ -91,10 +91,15 @@ outputs:
   - name: cuda-cupti-dev
     build:
       binary_relocation: false
+      # Ignore LIEF overlinking checks on aarch64 for repacked shared libs
+      overlinking_ignore_patterns:  # [linux and aarch64]
+        - "targets/sbsa-linux/lib/*.so*"       # [linux and aarch64]
+        - "targets/sbsa-linux/lib/stubs/*.so*" # [linux and aarch64]
+        - "lib/*.so*"                          # [linux and aarch64]
       run_exports:
         - {{ pin_subpackage("cuda-cupti", max_pin="x") }}
     files:
-      - lib/checkpoint.so                         # [linux]
+      - lib/libcheckpoint.so                      # [linux]
       - lib/libcupti.so                           # [linux]
       - lib/libnv*.so                             # [linux]
       - lib/libpcsamplingutil.so                  # [linux]
