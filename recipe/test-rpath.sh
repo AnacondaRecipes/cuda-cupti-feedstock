@@ -6,7 +6,7 @@
 
 errors=""
 
-while IFS= read -r -d '' lib; do
+for lib in `find ${PREFIX}/${targetsDir}/lib -type f`; do
     [[ $lib =~ \.so ]] || continue
 
     rpath=$(patchelf --print-rpath $lib)
@@ -16,7 +16,7 @@ while IFS= read -r -d '' lib; do
     elif [[ $(objdump -x ${lib} | grep "PATH") == *"RUNPATH"* ]]; then
         errors+="$lib\n"
     fi
-done < <(find "${PREFIX}/${targetsDir}/lib" -type f -print0)
+done
 
 if [[ $errors ]]; then
     echo "The following libraries were found with an unexpected RPATH:"

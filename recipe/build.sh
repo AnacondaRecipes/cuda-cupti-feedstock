@@ -7,7 +7,7 @@ mkdir -p ${PREFIX}/lib
 [[ ${target_platform} == "linux-ppc64le" ]] && targetsDir="targets/ppc64le-linux"
 [[ ${target_platform} == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
 
- for i in *; do
+for i in `ls`; do
     [[ $i == "build_env_setup.sh" ]] && continue
     [[ $i == "conda_build.sh" ]] && continue
     [[ $i == "metadata_conda_debug.yaml" ]] && continue
@@ -21,9 +21,7 @@ mkdir -p ${PREFIX}/lib
                 # Shared libraries are symlinked in $PREFIX/lib
                 ln -s ${PREFIX}/${targetsDir}/$j ${PREFIX}/$j
 
-                # Patch only real files (skip symlinks) to have strict RPATH=$ORIGIN and no RUNPATH
-                if [[ ! -L ${PREFIX}/${targetsDir}/$j ]]; then
-                    patchelf --remove-rpath ${PREFIX}/${targetsDir}/$j || true
+                if [[ $j =~ \.so\. ]]; then
                     patchelf --set-rpath '$ORIGIN' --force-rpath ${PREFIX}/${targetsDir}/$j
                 fi
             done
