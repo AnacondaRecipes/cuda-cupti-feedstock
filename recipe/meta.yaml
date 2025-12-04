@@ -1,7 +1,7 @@
 {% set name = "cuda-cupti" %}
-{% set version = "13.0.85" %}
-{% set lib_version = "2025.3.1" %}
-{% set cuda_version = "13.0" %}
+{% set version = "13.1.75" %}
+{% set lib_version = "2025.4.0" %}
+{% set cuda_version = "13.1" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -19,9 +19,9 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_cupti/{{ platform }}/cuda_cupti-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 92fb7e0430521517174c4c171173b888aaa8d78d8762e59752dea2ed14a0ad7d  # [linux64]
-  sha256: f6f34d534cce56f91b1496abf51be3b1559ba879985d34eb89c808004b77513a  # [aarch64]
-  sha256: e739e96415e1fb9a650eaac826f7cd24701e18ae2f7c26b78f3fabaf64c8e39b  # [win]
+  sha256: 8969976d7058adbef34baf57ad8116a70fa9936eb60280637e6304f505c80fea  # [linux64]
+  sha256: f47a6f963b6bf7ecffbf88dae7ab57c6f58fe374f37d632e51e350d506a73ad0  # [aarch64]
+  sha256: b65a436e338bc94fadb9a9d1294d6b4b2fa39e1f7d773f610a32ee899b4d38af  # [win]
 
 build:
   number: 0
