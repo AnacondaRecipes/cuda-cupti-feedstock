@@ -35,8 +35,8 @@ outputs:
     build:
       binary_relocation: false
       missing_dso_whitelist:
-        # Needed for rpath issues with conda-build and use of --error-overlinking command-line argument
-        - '$RPATH/libgcc_s.so.1'  # [linux]
+        # Needed for the use of conda-build's --error-overlinking command-line argument
+        - "*libgcc_s.so.*"  # [linux]
     files:
       - lib/libcupti*.so.*                    # [linux]
       - targets/{{ target_name }}/lib/*.so.*  # [linux]
@@ -77,6 +77,7 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
+      license_family: Other
       summary: Provides libraries to enable third party tools using GPU profiling APIs.
       description: |
         Provides libraries to enable third party tools using GPU profiling APIs.
@@ -126,6 +127,7 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
+      license_family: Other
       summary: Provides libraries to enable third party tools using GPU profiling APIs.
       description: |
         Provides libraries to enable third party tools using GPU profiling APIs.
@@ -154,6 +156,7 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
+      license_family: Other
       summary: Provides libraries to enable third party tools using GPU profiling APIs.
       description: |
         Provides libraries to enable third party tools using GPU profiling APIs.
@@ -182,6 +185,7 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
+      license_family: Other
       summary: Provides libraries to enable third party tools using GPU profiling APIs.
       description: |
         Provides libraries to enable third party tools using GPU profiling APIs.
@@ -193,6 +197,7 @@ about:
   license_file: LICENSE
   license: LicenseRef-NVIDIA-End-User-License-Agreement
   license_url: https://docs.nvidia.com/cuda/eula/index.html
+  license_family: Other
   summary: Provides libraries to enable third party tools using GPU profiling APIs.
   description: |
     Provides libraries to enable third party tools using GPU profiling APIs.
@@ -201,7 +206,6 @@ about:
 
 extra:
   skip-lints:
-    - license_file_overspecified
     - missing_tests
   feedstock-name: cuda-cupti
   recipe-maintainers:
