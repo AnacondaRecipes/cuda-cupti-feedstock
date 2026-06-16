@@ -3,3 +3,8 @@ upstream_sources:
   - webpage:
       url: https://api.anaconda.org/package/conda-forge/cuda-cupti
       regex: '"version":\s*"([^"]+)"'
+    packages:
+      - cuda-cupti
+      - cuda-cupti-dev
+      - cuda-cupti-doc
+      - cuda-cupti-static
