@@ -1,6 +1,6 @@
 {% set name = "cuda-cupti" %}
-{% set version = "13.3.35" %}
-{% set lib_version = "2026.2.0" %}
+{% set version = "13.3.75" %}
+{% set lib_version = "2026.2.1" %}
 {% set cuda_version = "13.3" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -17,9 +17,9 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_cupti/{{ platform }}/cuda_cupti-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 8ec73c3063039a780a45d136329563a5c15e3a034b1b082196cd8d98add053ba  # [linux64]
-  sha256: 6a83909fe008f84815b39b257fbfb4f698ac777233930677c0deccbb596b26ef  # [aarch64]
-  sha256: 51d7b1a6e66f343cda1dff0fbd3309a0031034834f33f825e6ab87b7ad0b174b  # [win]
+  sha256: 5f9df946729a39830ebee4f3467cd28b5bf05740bf753fb780706e66531cc53e  # [linux64]
+  sha256: 602ac5c3e3d4d21bf918184a37688eec9e883e7468e511b026c3b1d525c46803  # [aarch64]
+  sha256: 298eb0dfbd7eb63b63aab0533b4ba1ab2542c2ea03842a744973c7f38d0982b3  # [win]
 
 build:
   number: 0
@@ -87,7 +87,8 @@ outputs:
   - name: cuda-cupti-dev
     build:
       run_exports:
-        - {{ pin_subpackage("cuda-cupti", max_pin="x") }}
+        - {{ pin_subpackage("cuda-cupti", max_pin="x") }}      # [linux]
+        - {{ pin_subpackage("cuda-cupti", max_pin="x.x.x") }}  # [win]
     files:
       - lib/libcheckpoint.so                      # [linux]
       - lib/libcupti.so                           # [linux]
