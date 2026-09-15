@@ -211,6 +211,7 @@ about:
 
 extra:
   skip-lints:
+    - deprecate_license_url
     - missing_tests
   feedstock-name: cuda-cupti
   recipe-maintainers:
