@@ -1,15 +1,21 @@
 {% set name = "cuda-cupti" %}
-{% set version = "13.3.75" %}
-{% set lib_version = "2026.2.1" %}
-{% set cuda_version = "13.3" %}
+{% set version = "13.4.58" %}
+{% set lib_version = "2026.3.0" %}
+{% set cuda_version = "13.4" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-sbsa" %}  # [aarch64]
-{% set platform = "windows-x86_64" %}  # [win]
+{% set platform = "windows-x86_64" %}  # [win64]
+{% set platform = "windows-arm64" %}  # [win and arm64]
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
-{% set target_name = "x64" %}  # [win]
+{% set target_name = "x64" %}  # [win64]
+{% set target_name = "arm64" %}  # [win and arm64]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
+{% set sha256 = "1e449e94b4201d5fca5499040d1c69c33e938e5151ab151375aeee5ba5679a61" %}  # [linux64]
+{% set sha256 = "ad6d9a16d83670ca328b6a30fb3f3b2125039d715cf494109ae88a8d7f77018d" %}  # [aarch64]
+{% set sha256 = "810073c5598bbb9a9edd9ffd4a16ea82f24927588ca30255cff037aa3cf9d0ea" %}  # [win64]
+{% set sha256 = "8806e35c03747c7e7abca929fd978ddd13a5973e7f020b490ad44f4cf43a528e" %}  # [win and arm64]
 
 package:
   name: {{ name|lower }}-split
@@ -17,9 +23,7 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_cupti/{{ platform }}/cuda_cupti-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 5f9df946729a39830ebee4f3467cd28b5bf05740bf753fb780706e66531cc53e  # [linux64]
-  sha256: 602ac5c3e3d4d21bf918184a37688eec9e883e7468e511b026c3b1d525c46803  # [aarch64]
-  sha256: 298eb0dfbd7eb63b63aab0533b4ba1ab2542c2ea03842a744973c7f38d0982b3  # [win]
+  sha256: {{ sha256 }}
 
 build:
   number: 0
