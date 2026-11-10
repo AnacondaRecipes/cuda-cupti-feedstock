@@ -1,7 +1,7 @@
 {% set name = "cuda-cupti" %}
-{% set version = "13.4.92" %}
-{% set lib_version = "2026.3.1" %}
-{% set cuda_version = "13.4" %}
+{% set version = "13.5.25" %}
+{% set lib_version = "2026.4.0" %}
+{% set cuda_version = "13.5" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-sbsa" %}  # [aarch64]
 {% set platform = "windows-x86_64" %}  # [win64]
@@ -12,10 +12,10 @@
 {% set target_name = "arm64" %}  # [win and arm64]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
-{% set sha256 = "d182ce791affb8cc33e68c773d05f74b1719548d7f24e12b73525cae75d9d51e" %}  # [linux64]
-{% set sha256 = "2cdf083aca9002cf4edacfaae3fee62f21c1f2408c457df81c99b651f119f78f" %}  # [aarch64]
-{% set sha256 = "6a63ffe4030f080f827daa11b0ffbed109c6b66234cc4e96a54686ed302e7e4f" %}  # [win64]
-{% set sha256 = "62b2491dcf2b9680b54785fa725d3608a50c933b5b0b60d96107c47a9e65cc94" %}  # [win and arm64]
+{% set sha256 = "a2a197edf12ec2761314eaaca85f927f6b0f42f709bfbce6203b992edf9f8d0a" %}  # [linux64]
+{% set sha256 = "a2af4d1b864a80969e1f589b27491617c701584684e2f7a478be0ca719ec04f6" %}  # [aarch64]
+{% set sha256 = "afee8b3a13d6d009a042e3b9addef0675c433199fd299e78db1cdd5aaf5b8c62" %}  # [win64]
+{% set sha256 = "cc0981c6f22839c20e2edfccb58eee39c792c0f6c84178f3a2be1b2853ad2c18" %}  # [win and arm64]
 
 package:
   name: {{ name|lower }}-split
@@ -72,7 +72,7 @@ outputs:
         - test -f $PREFIX/targets/{{ target_name }}/lib/libcupti.so.{{ lib_version }}            # [linux]
         - bash test-rpath.sh                                                                     # [linux]
         - if not exist %LIBRARY_BIN%\checkpoint.dll exit 1                 # [win]
-        - if not exist %LIBRARY_BIN%\cupti64_{{ lib_version }}.dll exit 1  # [win]
+        - if not exist %LIBRARY_BIN%\cupti64_*.dll exit 1                  # [win]
         - if not exist %LIBRARY_BIN%\nvperf_host.dll exit 1                # [win]
         - if not exist %LIBRARY_BIN%\nvperf_target.dll exit 1              # [win]
         - if not exist %LIBRARY_BIN%\pcsamplingutil.dll exit 1             # [win]
